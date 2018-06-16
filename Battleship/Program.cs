@@ -36,14 +36,28 @@ namespace Battleship
             result = Console.ReadLine();
             int.TryParse(result, out b);
 
-            shipController.AddShip(x, y, a, b);
-            player.InitialSetGrid(shipController.GetGrid());
-            botPlayer.InitialSetGrid(shipController.GetGrid());
-            //board.DrawBoard(player.GetGrid());
+            int addShipsResult = shipController.AddShip(x, y, a, b);
+
+            if (addShipsResult != 0)
+            {
+                if (addShipsResult == 1)
+                    Console.WriteLine("Ship can't be placed diagonally");
+                else if (addShipsResult == 2)
+                    Console.WriteLine("Ship's length can't be equal 1");
+                else if (addShipsResult == 3)
+                    Console.WriteLine("Ship can't be placed on occupied tile");
+                else if (addShipsResult == 4)
+                    Console.WriteLine("Unknown error");
+
+                Console.ReadKey();
+                return;
+            }
+                
+            player.InitialSetGridWithShip(shipController.GetGrid());
+            botPlayer.InitialSetGridWithShip(shipController.GetGrid());
 
             while (true)
             {
-                Console.Clear();
                 Console.WriteLine("Here's your board");
                 board.DrawBoard(player.GetYourGrid());
                 Console.WriteLine("Your enemy's board");
@@ -58,9 +72,6 @@ namespace Battleship
                 int.TryParse(result, out y);
                 player.Shoot(botPlayer, x, y);
             }
-
-
-
 
             Console.ReadKey();
         }

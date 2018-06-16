@@ -34,19 +34,6 @@ namespace Battleship
             }
         }
 
-        private void InitializeCleanGrid(char [,] grid)
-        {
-            grid = new char[10, 10];
-
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    grid[i, j] = ' ';
-                }
-            }
-        }
-
         public char[,] GetYourGrid()
         {
             return Grid;
@@ -62,7 +49,7 @@ namespace Battleship
             EnemyGrid[y, x] = status;
         }
 
-        public void InitialSetGrid(char[,] grid)
+        public void InitialSetGridWithShip(char[,] grid)
         {
             Grid = grid;
         }
@@ -74,20 +61,26 @@ namespace Battleship
             if (enemyGridStatus[y, x].Equals(' '))
             {
                 SetEnemyGrid(x, y, 'M');
+                Console.Clear();
                 Console.WriteLine("You missed!");
+                Console.WriteLine();
                 return;
             }
 
             if (enemyGridStatus[y, x].Equals('M') || enemyGridStatus[x, y].Equals('S'))
             {
+                Console.Clear();
                 Console.WriteLine("Can't shoot in the same space!");
+                Console.WriteLine();
                 return;
             }
 
             if (enemyGridStatus[y, x].Equals('O'))
             {
                 SetEnemyGrid(x, y, 'S');
+                Console.Clear();
                 Console.WriteLine("Nice shot!");
+                Console.WriteLine();
                 return;
             }
         }

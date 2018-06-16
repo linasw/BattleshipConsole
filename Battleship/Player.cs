@@ -10,9 +10,12 @@ namespace Battleship
     {
         public char[,] Grid;
         public char[,] EnemyGrid;
+        public int WinningShotNumber;
+        public int ShotsPlaced;
 
         public Player()
         {
+            ShotsPlaced = 0;
             Grid = new char[10, 10];
 
             for (int i = 0; i < 10; i++)
@@ -32,6 +35,14 @@ namespace Battleship
                     EnemyGrid[i, j] = ' ';
                 }
             }
+        }
+
+        public void SetWinningShotNumber(int x, int y, int a, int b) //Counts ships length and sets WinningShotNumber
+        {
+            if (x != a)
+                WinningShotNumber = Math.Abs(x - a) + 1;
+            else
+                WinningShotNumber = Math.Abs(y - b) + 1;
         }
 
         public char[,] GetYourGrid()
@@ -77,6 +88,7 @@ namespace Battleship
 
             if (enemyGridStatus[y, x].Equals('O'))
             {
+                ShotsPlaced++;
                 SetEnemyGrid(x, y, 'S');
                 Console.Clear();
                 Console.WriteLine("Nice shot!");

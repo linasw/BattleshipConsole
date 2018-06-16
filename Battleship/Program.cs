@@ -52,7 +52,8 @@ namespace Battleship
                 Console.ReadKey();
                 return;
             }
-                
+
+            player.SetWinningShotNumber(x, y, a, b);
             player.InitialSetGridWithShip(shipController.GetGrid());
             botPlayer.InitialSetGridWithShip(shipController.GetGrid());
 
@@ -71,9 +72,14 @@ namespace Battleship
                 result = Console.ReadLine();
                 int.TryParse(result, out y);
                 player.Shoot(botPlayer, x, y);
-            }
 
-            Console.ReadKey();
+                if (player.ShotsPlaced == player.WinningShotNumber)
+                {
+                    Console.WriteLine("You've won!");
+                    Console.ReadKey();
+                    break;
+                }
+            }
         }
     }
 }

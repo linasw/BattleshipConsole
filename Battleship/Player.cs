@@ -6,90 +6,36 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    public class Player
+    public class Player : BasePlayer
     {
-        public char[,] Grid;
-        public char[,] EnemyGrid;
-        public int WinningShotNumber;
-        public int ShotsPlaced;
-
-        public Player()
+        public Player() : base()
         {
-            ShotsPlaced = 0;
-            Grid = new char[10, 10];
 
-            for (int i = 0; i < 10; i++)
+        }
+
+        public override void Shoot(BasePlayer enemyPlayer, int x, int y)
+        {
+            if (enemyPlayer.Grid[y, x].Equals(' '))
             {
-                for (int j = 0; j < 10; j++)
-                {
-                    Grid[i, j] = ' ';
-                }
-            }
-
-            EnemyGrid = new char[10, 10];
-
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    EnemyGrid[i, j] = ' ';
-                }
-            }
-        }
-
-        public void SetWinningShotNumber(int x, int y, int a, int b) //Counts ships length and sets WinningShotNumber
-        {
-            if (x != a)
-                WinningShotNumber = Math.Abs(x - a) + 1;
-            else
-                WinningShotNumber = Math.Abs(y - b) + 1;
-        }
-
-        public char[,] GetYourGrid()
-        {
-            return Grid;
-        }
-
-        public char[,] GetEnemyGrid()
-        {
-            return EnemyGrid;
-        }
-
-        public void SetEnemyGrid(int x, int y, char status)
-        {
-            EnemyGrid[y, x] = status;
-        }
-
-        public void InitialSetGridWithShip(char[,] grid)
-        {
-            Grid = grid;
-        }
-
-        public void Shoot(Player enemyPlayer, int x, int y)
-        {
-            char[,] enemyGridStatus = enemyPlayer.GetYourGrid();
-
-            if (enemyGridStatus[y, x].Equals(' '))
-            {
-                SetEnemyGrid(x, y, 'M');
+                EnemyGrid[y, x] = 'M';
                 Console.Clear();
                 Console.WriteLine("You missed!");
                 Console.WriteLine();
                 return;
             }
 
-            if (enemyGridStatus[y, x].Equals('M') || enemyGridStatus[x, y].Equals('S'))
+            if (enemyPlayer.Grid[y, x].Equals('M') || EnemyGrid[y, x].Equals('S'))
             {
                 Console.Clear();
-                Console.WriteLine("Can't shoot in the same space!");
+                Console.WriteLine("You just shot in the same place and lost your turn! Not very smart...");
                 Console.WriteLine();
                 return;
             }
 
-            if (enemyGridStatus[y, x].Equals('O'))
+            if (enemyPlayer.Grid[y, x].Equals('O'))
             {
-                ShotsPlaced++;
-                SetEnemyGrid(x, y, 'S');
+                ShotsHitNumber++;
+                EnemyGrid[y, x] = 'S';
                 Console.Clear();
                 Console.WriteLine("Nice shot!");
                 Console.WriteLine();

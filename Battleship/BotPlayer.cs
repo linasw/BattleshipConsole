@@ -8,7 +8,7 @@ namespace Battleship
 {
     public class BotPlayer : BasePlayer
     {
-        public BotPlayer() : base()
+        public BotPlayer(int boardHeight, int boardWidth) : base(boardHeight, boardWidth)
         {
             
         }

@@ -8,7 +8,7 @@ namespace Battleship
 {
     public class Player : BasePlayer
     {
-        public Player() : base()
+        public Player(int boardHeight, int boardWidth) : base(boardHeight, boardWidth)
         {
 
         }

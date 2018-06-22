@@ -8,28 +8,32 @@ namespace Battleship
 {
     public abstract class BasePlayer
     {
+        private int _boardHeight;
+        private int _boardWidth;
         public char[,] Grid { get; set; }
         public char[,] EnemyGrid { get; set; }
         public int ShotsHitNumber { get; set; }
         public int WinningShotsNumber { get; set; }
 
-        public BasePlayer()
+        public BasePlayer(int boardHeight, int boardSize)
         {
+            _boardHeight = boardHeight;
+            _boardWidth = boardSize;
             ShotsHitNumber = 0;
             WinningShotsNumber = 0;
-            Grid = new char[10, 10];
-            EnemyGrid = new char[10, 10];
+            Grid = new char[_boardHeight, _boardWidth];
+            EnemyGrid = new char[_boardHeight, _boardWidth];
             InitializeCleanGrid(Grid);
             InitializeCleanGrid(EnemyGrid);
         }
 
         private void InitializeCleanGrid(char[,] grid)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < _boardHeight; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < _boardWidth; j++)
                 {
-                    grid[i, j] = ' ';
+                    grid[i, j] = 'o';
                 }
             }
         }

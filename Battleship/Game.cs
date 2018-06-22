@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    public class Menu
+    public class Game
     {
+        Globals globals;
         Random random;
+        Board board;
         Player player;
         BotPlayer botPlayer;
         ShipController shipController;
 
-        public Menu()
+        public Game()
         {
+            globals = new Globals();
             random = new Random();
-            player = new Player();
-            botPlayer = new BotPlayer();
+            board = new Board(globals.BoardHeight, globals.BoardWidth);
+            player = new Player(globals.BoardHeight, globals.BoardWidth);
+            botPlayer = new BotPlayer(globals.BoardHeight, globals.BoardWidth);
             shipController = new ShipController();
         }
 
@@ -53,9 +57,9 @@ namespace Battleship
         private void WonMesssage()
         {
             Console.WriteLine("Here's your board");
-            Board.DrawBoard(player.Grid);
+            board.DrawBoard(player.Grid);
             Console.WriteLine("Your enemy's board");
-            Board.DrawBoard(player.EnemyGrid);
+            board.DrawBoard(player.EnemyGrid);
             Console.WriteLine("You won!");
             Console.WriteLine("!!! CONGRATULATIONS !!!");
             Console.WriteLine();
@@ -66,9 +70,9 @@ namespace Battleship
         private void LostMessage()
         {
             Console.WriteLine("Here's your board");
-            Board.DrawBoard(player.Grid);
+            board.DrawBoard(player.Grid);
             Console.WriteLine("Your enemy's board");
-            Board.DrawBoard(player.EnemyGrid);
+            board.DrawBoard(player.EnemyGrid);
             Console.WriteLine("You lost :(");
             Console.WriteLine("!!! BETTER LUCK NEXT TIME !!!");
             Console.WriteLine();
@@ -78,7 +82,7 @@ namespace Battleship
 
         private void PlantShips()
         {
-            Board.DrawBoard(player.Grid);
+            board.DrawBoard(player.Grid);
             Console.WriteLine("Enter starting position of your ship");
             Console.WriteLine("Enter x");
             string readLineResult = Console.ReadLine();
@@ -143,9 +147,9 @@ namespace Battleship
         private void PlayerShoot()
         {
             Console.WriteLine("Here's your board");
-            Board.DrawBoard(player.Grid);
+            board.DrawBoard(player.Grid);
             Console.WriteLine("Your enemy's board");
-            Board.DrawBoard(player.EnemyGrid);
+            board.DrawBoard(player.EnemyGrid);
             Console.WriteLine("\nNow shoot!");
             Console.WriteLine();
             Console.WriteLine("Enter x");
@@ -171,8 +175,7 @@ namespace Battleship
 
         private void BotShoot()
         {
-            botPlayer.Shoot(player, random.Next(0, 9), random.Next(0, 9));
-
+            botPlayer.Shoot(player, random.Next(0, globals.BoardWidth), random.Next(0, globals.BoardHeight));
         }
 
         private bool IsWinningShot(BasePlayer player)

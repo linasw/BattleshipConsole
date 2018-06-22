@@ -10,7 +10,7 @@ namespace Battleship
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
+            Game menu = new Game();
             menu.StartGame();
         }
     }

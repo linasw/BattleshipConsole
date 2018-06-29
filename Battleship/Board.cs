@@ -8,28 +8,27 @@ namespace Battleship
 {
     public class Board
     {
-        private int _boardHeight;
-        private int _boardWidth;
-
-        public Board(int boardHeight, int boardWidth)
+        public static void DrawBoard(List<List<char>> grid)
         {
-            _boardHeight = boardHeight;
-            _boardWidth = boardWidth;
-        }
-
-        public void DrawBoard(char[,] grid)
-        {
-            Console.WriteLine("  | 0 1 2 3 4 5 6 7 8 9");
+            Console.Write("  | ");
+            for (int p = 0; p < grid[0].Count(); p++)
+            {
+                Console.Write($"{p} ");
+            }
+            Console.WriteLine();
             Console.WriteLine("--+--------------------");
 
-            for (int i = 0; i < _boardHeight; i++)
+            int i = 0;
+
+            foreach (var sublist in grid)
             {
                 Console.Write(i.ToString() + " | ");
-                for (int j = 0; j < _boardWidth; j++)
+                foreach (var value in sublist)
                 {
-                    Console.Write(grid[i, j] + " "); 
+                    Console.Write(value + " ");
                 }
                 Console.WriteLine();
+                i++;
             }
         }
     }

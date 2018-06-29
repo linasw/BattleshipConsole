@@ -8,36 +8,36 @@ namespace Battleship
 {
     public class Player : BasePlayer
     {
-        public Player(int boardHeight, int boardWidth) : base(boardHeight, boardWidth)
+        public Player(int boardWidth, int boardHeight) : base(boardWidth, boardHeight)
         {
 
         }
 
         public override void Shoot(BasePlayer enemyPlayer, int x, int y)
         {
-            if (enemyPlayer.Grid[y, x].Equals(' '))
+            if (enemyPlayer.Grid[y][x].Equals(' '))
             {
-                EnemyGrid[y, x] = 'M';
+                EnemyGrid[y][x] = 'M';
                 Console.Clear();
-                Console.WriteLine("You missed!");
+                Console.WriteLine($"You shot at ({x}, {y}). That's a missed shot!");
                 Console.WriteLine();
                 return;
             }
 
-            if (enemyPlayer.Grid[y, x].Equals('M') || EnemyGrid[y, x].Equals('S'))
+            if (enemyPlayer.Grid[y][x].Equals('M') || EnemyGrid[y][x].Equals('S'))
             {
                 Console.Clear();
-                Console.WriteLine("You just shot in the same place and lost your turn! Not very smart...");
+                Console.WriteLine($"You just shot in the same place at ({x}, {y}) and lost your turn! Not very smart...");
                 Console.WriteLine();
                 return;
             }
 
-            if (enemyPlayer.Grid[y, x].Equals('O'))
+            if (enemyPlayer.Grid[y][x].Equals('O'))
             {
                 ShotsHitNumber++;
-                EnemyGrid[y, x] = 'S';
+                EnemyGrid[y][x] = 'S';
                 Console.Clear();
-                Console.WriteLine("Nice shot!");
+                Console.WriteLine($"You shot at ({x}, {y}). Nice shot!");
                 Console.WriteLine();
                 return;
             }

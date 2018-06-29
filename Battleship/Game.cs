@@ -19,10 +19,10 @@ namespace Battleship
         {
             globals = new Globals();
             random = new Random();
-            board = new Board(globals.BoardHeight, globals.BoardWidth);
+            board = new Board();
             player = new Player(globals.BoardHeight, globals.BoardWidth);
             botPlayer = new BotPlayer(globals.BoardHeight, globals.BoardWidth);
-            shipController = new ShipController();
+            shipController = new ShipController(globals.BoardHeight, globals.BoardWidth);
         }
 
         public void StartGame()
@@ -57,9 +57,9 @@ namespace Battleship
         private void WonMesssage()
         {
             Console.WriteLine("Here's your board");
-            board.DrawBoard(player.Grid);
+            Board.DrawBoard(player.Grid);
             Console.WriteLine("Your enemy's board");
-            board.DrawBoard(player.EnemyGrid);
+            Board.DrawBoard(player.EnemyGrid);
             Console.WriteLine("You won!");
             Console.WriteLine("!!! CONGRATULATIONS !!!");
             Console.WriteLine();
@@ -70,9 +70,9 @@ namespace Battleship
         private void LostMessage()
         {
             Console.WriteLine("Here's your board");
-            board.DrawBoard(player.Grid);
+            Board.DrawBoard(player.Grid);
             Console.WriteLine("Your enemy's board");
-            board.DrawBoard(player.EnemyGrid);
+            Board.DrawBoard(player.EnemyGrid);
             Console.WriteLine("You lost :(");
             Console.WriteLine("!!! BETTER LUCK NEXT TIME !!!");
             Console.WriteLine();
@@ -82,7 +82,7 @@ namespace Battleship
 
         private void PlantShips()
         {
-            board.DrawBoard(player.Grid);
+            Board.DrawBoard(player.Grid);
             Console.WriteLine("Enter starting position of your ship");
             Console.WriteLine("Enter x");
             string readLineResult = Console.ReadLine();
@@ -147,9 +147,9 @@ namespace Battleship
         private void PlayerShoot()
         {
             Console.WriteLine("Here's your board");
-            board.DrawBoard(player.Grid);
+            Board.DrawBoard(player.Grid);
             Console.WriteLine("Your enemy's board");
-            board.DrawBoard(player.EnemyGrid);
+            Board.DrawBoard(player.EnemyGrid);
             Console.WriteLine("\nNow shoot!");
             Console.WriteLine();
             Console.WriteLine("Enter x");

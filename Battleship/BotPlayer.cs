@@ -15,15 +15,15 @@ namespace Battleship
 
         public override void Shoot(BasePlayer enemyPlayer, int x, int y)
         {
-            if (enemyPlayer.Grid[y, x].Equals(' '))
+            if (enemyPlayer.Grid[y][x].Equals(' '))
             {
-                Console.WriteLine($"The bot shot at {x}/{y} and he missed!");
-                enemyPlayer.Grid[y, x] = 'M';
-                EnemyGrid[y, x] = 'M';
+                Console.WriteLine($"The bot shot at ({x}, {y}) and he missed!");
+                enemyPlayer.Grid[y][x] = 'M';
+                EnemyGrid[y][x] = 'M';
                 return;
             }
 
-            if (enemyPlayer.Grid[y, x].Equals('M') || EnemyGrid[y, x].Equals('S'))
+            if (enemyPlayer.Grid[y][x].Equals('M') || EnemyGrid[y][x].Equals('S'))
             {
                 if (x < 9)
                 {
@@ -43,12 +43,12 @@ namespace Battleship
                 return;
             }
 
-            if (enemyPlayer.Grid[y, x].Equals('O'))
+            if (enemyPlayer.Grid[y][x].Equals('O'))
             {
-                Console.WriteLine($"The bot shot at {x}/{y} and he didn't miss this time!");
+                Console.WriteLine($"The bot shot at ({x}, {y}) and he didn't miss this time!");
                 ShotsHitNumber++;
-                enemyPlayer.Grid[y, x] = 'S';
-                EnemyGrid[y, x] = 'S';
+                enemyPlayer.Grid[y][x] = 'S';
+                EnemyGrid[y][x] = 'S';
                 return;
             }
         }

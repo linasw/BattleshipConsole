@@ -6,27 +6,33 @@ using System.Threading.Tasks;
 
 namespace Battleship
 {
-    class ShipController
+    public class ShipController
     {
-        public char[,] Grid { get; set; }
-        private char[,] _tempGrid;
+        private int _boardWidth;
+        private int _boardHeight;
+        public List<List<char>> Grid { get; set; }
+        private List<List<char>> _tempGrid;
 
-        public ShipController()
+        public ShipController(int boardWidth, int boardHeight)
         {
-            Grid = new char[10, 10];
-            _tempGrid = new char[10, 10];
+            _boardWidth = boardWidth;
+            _boardHeight = boardHeight;
+            Grid = new List<List<char>>();
+            _tempGrid = new List<List<char>>();
             InitializeCleanGrid(Grid);
             InitializeCleanGrid(_tempGrid);
         }
 
-        private void InitializeCleanGrid(char[,] grid)
+        private void InitializeCleanGrid(List<List<char>> grid)
         {
             for (int i = 0; i < 10; i++)
             {
+                List<char> row = new List<char>();
                 for (int j = 0; j < 10; j++)
                 {
-                    grid[i, j] = ' ';
+                    row.Add(' ');
                 }
+                grid.Add(row);
             }
         }
 
@@ -67,7 +73,7 @@ namespace Battleship
             {
                 if (IsOccupied(column, rowStart))
                     return 3;
-                _tempGrid[rowStart, column] = 'O';
+                _tempGrid[rowStart][column] = 'O';
                 rowStart++;
             }
 
@@ -81,7 +87,7 @@ namespace Battleship
             {
                 if (IsOccupied(columnStart, row))
                     return 3;
-                _tempGrid[row, columnStart] = 'O';
+                _tempGrid[row][columnStart] = 'O';
                 columnStart++;
             }
 
@@ -91,7 +97,7 @@ namespace Battleship
 
         private bool IsOccupied(int x, int y)
         {
-            if (Grid[y, x].Equals('O'))
+            if (Grid[y][x].Equals('O'))
                 return true;
             else return false;
         }

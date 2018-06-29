@@ -8,7 +8,7 @@ namespace Battleship
 {
     public class BotPlayer : BasePlayer
     {
-        public BotPlayer(int boardHeight, int boardWidth) : base(boardHeight, boardWidth)
+        public BotPlayer(int boardWidth, int boardHeight) : base(boardWidth, boardHeight)
         {
             
         }
@@ -25,19 +25,19 @@ namespace Battleship
 
             if (enemyPlayer.Grid[y][x].Equals('M') || EnemyGrid[y][x].Equals('S'))
             {
-                if (x < 9)
+                if (x == _boardWidth && y == _boardHeight)
                 {
-                    Shoot(enemyPlayer, ++x, y);
+                    Shoot(enemyPlayer, 0, 0);
                     return;
                 }
-                else if (x == 9 && y < 9)
+                else if (x == _boardWidth && y < _boardHeight)
                 {
                     Shoot(enemyPlayer, 0, ++y);
                     return;
                 }
-                else if (x == 9 && y == 9)
+                else if (x <= _boardWidth)
                 {
-                    Shoot(enemyPlayer, 0, 0);
+                    Shoot(enemyPlayer, ++x, y);
                     return;
                 }
                 return;

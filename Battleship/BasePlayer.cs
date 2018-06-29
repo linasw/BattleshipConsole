@@ -10,9 +10,7 @@ namespace Battleship
     {
         protected int _boardWidth;
         protected int _boardHeight;
-        //public char[,] Grid { get; set; }
         public List<List<char>> Grid { get; set; }
-        //public char[,] EnemyGrid { get; set; }
         public List<List<char>> EnemyGrid { get; set; }
         public int ShotsHitNumber { get; set; }
         public int WinningShotsNumber { get; set; }

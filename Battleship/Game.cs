@@ -20,9 +20,9 @@ namespace Battleship
             globals = new Globals();
             random = new Random();
             board = new Board();
-            player = new Player(globals.BoardHeight, globals.BoardWidth);
+            player = new Player(globals.BoardWidth, globals.BoardHeight);
             botPlayer = new BotPlayer(globals.BoardHeight, globals.BoardWidth);
-            shipController = new ShipController(globals.BoardHeight, globals.BoardWidth);
+            shipController = new ShipController(globals.BoardWidth, globals.BoardHeight);
         }
 
         public void StartGame()

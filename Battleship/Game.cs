@@ -175,7 +175,7 @@ namespace Battleship
 
         private void BotShoot()
         {
-            botPlayer.Shoot(player, random.Next(0, globals.BoardWidth), random.Next(0, globals.BoardHeight));
+            botPlayer.Shoot(player, random.Next(0, globals.BoardWidth - 1), random.Next(0, globals.BoardHeight - 1));
         }
 
         private bool IsWinningShot(BasePlayer player)

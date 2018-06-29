@@ -138,8 +138,8 @@ namespace Battleship
                 Console.ReadKey();
                 return;
             }
-            player.Grid = shipController.Grid;
-            botPlayer.Grid = shipController.Grid;
+            player.Grid = new List<List<char>>(shipController.Grid);
+            botPlayer.Grid = new List<List<char>>(shipController.Grid);
             player.SetWinningShotNumber(x, y, a, b);
             botPlayer.SetWinningShotNumber(x, y, a, b);
         }
